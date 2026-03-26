@@ -54,7 +54,7 @@ public class Ruleta {
                 if (opcion >= 1 && opcion <= 3) {
                     return opcion;
                 } else {
-                    System.out.print("Opción inválida. Ingrese 1, 2 o 3: ");
+                    System.out.print("Opción inválida. Ingrese 1, 2 o 3: \n");
                 }
 
             } else {
