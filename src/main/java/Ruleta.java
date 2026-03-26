@@ -83,8 +83,7 @@ public class Ruleta {
     public static void iniciarRonda(Scanner in) {
         char tipo = leerTipoApuesta(in);
 
-        System.out.print("Ingrese monto a apostar: ");
-        int monto = in.nextInt();
+        int monto = leerMonto(in);
 
         int numero = girarRuleta();
         boolean acierto = evaluarResultado(numero, tipo);
@@ -216,6 +215,27 @@ public class Ruleta {
         System.out.println("Aciertos: " + aciertos);
         System.out.println("Porcentaje de acierto: " + porcentaje + "%");
         System.out.println("Ganancia/Pérdida neta: " + ganancia);
+    }
+    public static int leerMonto(Scanner in) {
+        int monto;
+
+        while (true) {
+            System.out.print("Ingrese monto a apostar: ");
+
+            if (in.hasNextInt()) {
+                monto = in.nextInt();
+
+                if (monto > 0) {
+                    return monto;
+                } else {
+                    System.out.println("El monto debe ser mayor a 0.");
+                }
+
+            } else {
+                System.out.println("Debe ingresar un número válido.");
+                in.next(); // limpia entrada inválida
+            }
+        }
     }
 }
 
