@@ -1,5 +1,6 @@
 import java.util.Random;
 import java.util.Scanner;
+
 public class Ruleta {
     public static final int MAX_HISTORIAL = 100;
     public static int[] historialNumeros = new int[MAX_HISTORIAL];
@@ -64,7 +65,16 @@ public class Ruleta {
      * @param in Scanner para entrada por consola.
      */
     public static void iniciarRonda(Scanner in) {
+        char tipo = leerTipoApuesta(in);
 
+        System.out.print("Ingrese monto a apostar: ");
+        int monto = in.nextInt();
+
+        int numero = girarRuleta();
+        boolean acierto = evaluarResultado(numero, tipo);
+
+        registrarResultado(numero, monto, acierto);
+        mostrarResultado(numero, tipo, monto, acierto);
     }
     /**
      * Permite al usuario seleccionar el tipo de apuesta (R/N/P/I).
@@ -72,7 +82,8 @@ public class Ruleta {
      * @return el tipo de apuesta elegido.
      */
     public static char leerTipoApuesta(Scanner in) {
-        return ’ ’;
+        System.out.print("Tipo de apuesta (R=Rojo, N=Negro, P=Par, I=Impar): ");
+        return in.next().toUpperCase().charAt(0);
     }
     /**
      * Simula el giro de la ruleta generando un número aleatorio de 0 a 36.
