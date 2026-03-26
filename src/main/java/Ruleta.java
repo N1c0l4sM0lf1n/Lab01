@@ -34,8 +34,8 @@ public class Ruleta {
      * Muestra en consola las opciones disponibles del menú.
      */
     public static void mostrarMenu() {
-        System.out.print("\n Escoja una opcion");
-        System.out.print("\n1. Iniciar una Ronda \n");
+        System.out.print("\n Escoja una opcion \n");
+        System.out.print("1. Iniciar una Ronda \n");
         System.out.print("2. Ver Estadisticas \n");
         System.out.print("3. Salir \n");
     }
@@ -77,13 +77,44 @@ public class Ruleta {
         mostrarResultado(numero, tipo, monto, acierto);
     }
     /**
+     * Muestra en consola el resultado de la ronda.
+     * @param numero número obtenido en la ruleta.
+     * @param tipo tipo de apuesta realizada.
+     * @param monto monto apostado.
+     * @param acierto si el jugador ganó o perdió.
+     */
+
+    private static void mostrarResultado(int numero, char tipo, int monto, boolean acierto) {
+        System.out.println("\nNúmero obtenido: " + numero);
+        System.out.println("Apuesta: " + tipo);
+        System.out.println("Monto: " + monto);
+
+        if (acierto) {
+            System.out.println("¡Ganaste!");
+        } else {
+            System.out.println("Perdiste.");
+        }
+    }
+
+    /**
      * Permite al usuario seleccionar el tipo de apuesta (R/N/P/I).
      * @param in Scanner para entrada por consola.
      * @return el tipo de apuesta elegido.
      */
     public static char leerTipoApuesta(Scanner in) {
-        System.out.print("Tipo de apuesta (R=Rojo, N=Negro, P=Par, I=Impar): ");
-        return in.next().toUpperCase().charAt(0);
+        char tipo;
+
+        do {
+            System.out.print("Tipo de apuesta (R=Rojo, N=Negro, P=Par, I=Impar): ");
+            tipo = in.next().toUpperCase().charAt(0);
+
+            if (tipo != 'R' && tipo != 'N' && tipo != 'P' && tipo != 'I') {
+                System.out.println("Opción inválida. Intente nuevamente.");
+            }
+
+        } while (tipo != 'R' && tipo != 'N' && tipo != 'P' && tipo != 'I');
+
+        return tipo;
     }
     /**
      * Simula el giro de la ruleta generando un número aleatorio de 0 a 36.
@@ -99,7 +130,15 @@ public class Ruleta {
      * @return true si acertó, false si perdió.
      */
     public static boolean evaluarResultado(int numero, char tipo) {
-        return false;
+        if (numero == 0) return false;
+
+        return switch (tipo) {
+            case 'R' -> esRojo(numero);
+            case 'N' -> !esRojo(numero);
+            case 'P' -> numero % 2 == 0;
+            case 'I' -> numero % 2 != 0;
+            default -> false;
+        };
     }
     /**
      * Determina si un número corresponde a color rojo.
@@ -107,28 +146,60 @@ public class Ruleta {
      * @return true si es rojo, false en caso contrario.
      */
     public static boolean esRojo(int n) {
+        for (int rojo : numerosRojos) {
+            if (rojo == n) return true;
+        }
         return false;
     }
-
     /**
     * Registra los resultados de la ronda en los arreglos de historial.
     * @param numero número obtenido en la ruleta.
     * @param apuesta monto apostado.
     * @param acierto si el jugador acertó o no.
     */
-    public static void registrarResultado(int numero, int apuesta, boolean acierto) {}
-    /**
-     * Muestra en consola el resultado de la ronda.
-     * @param numero número obtenido en la ruleta.
-     * @param tipo tipo de apuesta realizada.
-     * @param monto monto apostado.
-     * @param acierto si el jugador ganó o perdió.
-     */
-    public static void mostrarResultado(int numero, char tipo, int monto, boolean
-            acierto) {}
+    public static void registrarResultado(int numero, int apuesta, boolean acierto) {
+        if (historialSize < MAX_HISTORIAL) {
+            historialNumeros[historialSize] = numero;
+            historialApuestas[historialSize] = apuesta;
+            historialAciertos[historialSize] = acierto;
+            historialSize++;
+        }
+    }
     /**
      * Muestra estadísticas generales de todas las rondas jugadas.
      */
-    public static void mostrarEstadisticas() {}
+
+    public static void mostrarEstadisticas() {
+        if (historialSize == 0) {
+            System.out.println("No hay datos.");
+            return;
+        }
+
+        int totalApostado = 0;
+        int aciertos = 0;
+
+        for (int i = 0; i < historialSize; i++) {
+            totalApostado += historialApuestas[i];
+            if (historialAciertos[i]) aciertos++;
+        }
+
+        double porcentaje = (double) aciertos / historialSize * 100;
+        int ganancia = 0;
+
+        for (int i = 0; i < historialSize; i++) {
+            if (historialAciertos[i]) {
+                ganancia += historialApuestas[i];
+            } else {
+                ganancia -= historialApuestas[i];
+            }
+        }
+
+        System.out.println("\n--- ESTADÍSTICAS ---");
+        System.out.println("Rondas jugadas: " + historialSize);
+        System.out.println("Total apostado: " + totalApostado);
+        System.out.println("Aciertos: " + aciertos);
+        System.out.println("Porcentaje de acierto: " + porcentaje + "%");
+        System.out.println("Ganancia/Pérdida neta: " + ganancia);
+    }
 }
 
