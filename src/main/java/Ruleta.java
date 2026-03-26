@@ -45,7 +45,23 @@ public class Ruleta {
      * @return número de opción ingresado.
      */
     public static int leerOpcion(Scanner in) {
-        return in.nextInt();
+        int opcion;
+
+        while (true) {
+            if (in.hasNextInt()) {
+                opcion = in.nextInt();
+
+                if (opcion >= 1 && opcion <= 3) {
+                    return opcion;
+                } else {
+                    System.out.print("Opción inválida. Ingrese 1, 2 o 3: ");
+                }
+
+            } else {
+                System.out.print("Debe ingresar un número, no una letra \n");
+                in.next(); // limpia lo inválido
+            }
+        }
     }
     /**
      * Ejecuta la acción correspondiente a la opción del menú.
