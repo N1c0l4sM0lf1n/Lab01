@@ -18,30 +18,54 @@ public class Ruleta {
     /**
      * Controla el flujo principal del programa mostrando un menú en consola.
      */
-    public static void menu() {}
+    public static void menu() {
+        Scanner in = new Scanner(System.in);
+        int opcion;
+
+        do {
+            mostrarMenu();
+            opcion = leerOpcion(in);
+            ejecutarOpcion(opcion, in);
+        } while (opcion != 3);
+        in.close();
+    }
     /**
      * Muestra en consola las opciones disponibles del menú.
      */
-    public static void mostrarMenu() {}
+    public static void mostrarMenu() {
+        System.out.print("Escoja una opcion");
+        System.out.print("1. Iniciar una Ronda");
+        System.out.print("2. Ver Estadisticas");
+        System.out.print("3. Salir");
+    }
     /**
      * Lee la opción elegida por el usuario desde teclado.
      * @param in Scanner para entrada por consola.
      * @return número de opción ingresado.
      */
     public static int leerOpcion(Scanner in) {
-        return 0;
+        return in.nextInt();
     }
     /**
      * Ejecuta la acción correspondiente a la opción del menú.
      * @param opcion opción elegida por el usuario.
      * @param in Scanner para entrada por consola.
      */
-    public static void ejecutarOpcion(int opcion, Scanner in) {}
+    public static void ejecutarOpcion(int opcion, Scanner in) {
+        switch (opcion){
+            case 1 -> iniciarRonda(in);
+            case 2 -> mostrarEstadisticas();
+            case 3 -> System.out.println("Saliendo...");
+            default -> System.out.println("Opción inválida");
+        };
+    }
     /**
      * Inicia una ronda de la ruleta: leer apuesta, girar, evaluar y mostrar resultado.
      * @param in Scanner para entrada por consola.
      */
-    public static void iniciarRonda(Scanner in) {}
+    public static void iniciarRonda(Scanner in) {
+
+    }
     /**
      * Permite al usuario seleccionar el tipo de apuesta (R/N/P/I).
      * @param in Scanner para entrada por consola.
@@ -99,3 +123,4 @@ public class Ruleta {
      */
     public static void mostrarEstadisticas() {}
 }
+
