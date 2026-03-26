@@ -34,10 +34,10 @@ public class Ruleta {
      * Muestra en consola las opciones disponibles del menú.
      */
     public static void mostrarMenu() {
-        System.out.print("Escoja una opcion");
-        System.out.print("1. Iniciar una Ronda");
-        System.out.print("2. Ver Estadisticas");
-        System.out.print("3. Salir");
+        System.out.print("\n Escoja una opcion");
+        System.out.print("\n1. Iniciar una Ronda \n");
+        System.out.print("2. Ver Estadisticas \n");
+        System.out.print("3. Salir \n");
     }
     /**
      * Lee la opción elegida por el usuario desde teclado.
@@ -90,7 +90,7 @@ public class Ruleta {
      * @return número de la ruleta.
      */
     public static int girarRuleta() {
-        return 0;
+        return rng.nextInt(37);
     }
     /**
      * Evalúa si la apuesta realizada por el jugador fue acertada.
@@ -101,18 +101,15 @@ public class Ruleta {
     public static boolean evaluarResultado(int numero, char tipo) {
         return false;
     }
-    public static boolean esRojo(int n) {
-        return false;
-    }
     /**
-    * Registra los resultados de la ronda en los arreglos de historial.
-    * @param numero número obtenido en la ruleta.
-    * @param apuesta monto apostado.
-    * @param acierto si el jugador acertó o no.
-    */
+     * Determina si un número corresponde a color rojo.
+     * @param n número de la ruleta.
+     * @return true si es rojo, false en caso contrario.
+     */
     public static boolean esRojo(int n) {
         return false;
     }
+
     /**
     * Registra los resultados de la ronda en los arreglos de historial.
     * @param numero número obtenido en la ruleta.
