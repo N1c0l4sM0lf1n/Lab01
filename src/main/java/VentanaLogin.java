@@ -58,7 +58,7 @@ public class VentanaLogin {
             JOptionPane.showMessageDialog(frame, "Bienvenido " + nombre);
             frame.dispose();
 
-            Ruleta.menu();
+            new VentanaMenu().mostrar();
 
         } else {
             JOptionPane.showMessageDialog(frame, "Credenciales incorrectas");
