@@ -5,40 +5,55 @@ import java.awt.*;
 
 public class VentanaMenu {
 
+    private final SessionController session;
     private final JFrame frame = new JFrame("Menú");
-    private final JButton btnJugar = new JButton("Jugar Modelo.Ruleta");
-    private final JButton btnSalir = new JButton("Cerrar Sesión");
 
-    public VentanaMenu() {
-        configurarVentana();
-        configurarEventos();
+    public VentanaMenu(SessionController session) {
+        this.session = session;
+        configurar();
     }
 
-    private void configurarVentana() {
-        frame.setSize(300, 150);
-        frame.setLayout(new GridLayout(2,1));
+    private void configurar() {
+        frame.setSize(300,200);
+        frame.setLayout(new GridLayout(4,1));
 
+        JButton btnJugar = new JButton("Jugar");
+        JButton btnPerfil = new JButton("Perfil");
+        JButton btnSalir = new JButton("Salir");
+
+        JLabel lblSaldo = new JLabel();
+
+        actualizarSaldo(lblSaldo);
+
+        btnJugar.addActionListener(e -> {
+            frame.dispose();
+            new VentanaRuleta(session).mostrar();
+        });
+
+        btnPerfil.addActionListener(e -> {
+            frame.dispose();
+            new VentanaPerfil(session).mostrar();
+        });
+
+        btnSalir.addActionListener(e -> {
+            session.cerrarSesion();
+            frame.dispose();
+            new VentanaLogin(session).mostrarVentana();
+        });
+
+        frame.add(lblSaldo);
         frame.add(btnJugar);
+        frame.add(btnPerfil);
         frame.add(btnSalir);
     }
 
-    private void configurarEventos() {
-        btnJugar.addActionListener(e -> abrirRuleta());
-        btnSalir.addActionListener(e -> cerrarSesion());
+    private void actualizarSaldo(JLabel lbl) {
+        int saldo = session.getRuleta().getSaldo();
+        lbl.setText("Saldo: $" + saldo);
     }
 
     public void mostrar() {
         frame.setLocationRelativeTo(null);
         frame.setVisible(true);
-    }
-
-    private void abrirRuleta() {
-        frame.dispose();
-        new VentanaRuleta().mostrar();
-    }
-
-    private void cerrarSesion() {
-        frame.dispose();
-        new VentanaLogin().mostrarVentana();
     }
 }
