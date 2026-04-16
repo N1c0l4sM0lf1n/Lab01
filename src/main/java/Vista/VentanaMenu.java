@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.*;
 import java.awt.*;
+import Controlador.SessionController;
 
 public class VentanaMenu {
 
@@ -48,7 +49,7 @@ public class VentanaMenu {
     }
 
     private void actualizarSaldo(JLabel lbl) {
-        int saldo = session.getRuleta().getSaldo();
+        int saldo = session.getRuletaController().getSaldo();
         lbl.setText("Saldo: $" + saldo);
     }
 

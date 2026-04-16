@@ -2,6 +2,7 @@ package Vista;
 
 import javax.swing.*;
 import java.awt.*;
+import Controlador.SessionController;
 
 public class VentanaLogin {
 

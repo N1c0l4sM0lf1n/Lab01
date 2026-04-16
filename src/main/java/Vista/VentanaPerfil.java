@@ -1,6 +1,8 @@
 package Vista;
+
 import javax.swing.*;
 import java.awt.*;
+import Controlador.SessionController;
 
 public class VentanaPerfil {
 
@@ -23,7 +25,7 @@ public class VentanaPerfil {
         );
 
         JLabel lblSaldo = new JLabel(
-                "Saldo: $" + session.getRuleta().getSaldo()
+                "Saldo: $" + session.getRuletaController().getSaldo()
         );
 
         JButton btnGuardar = new JButton("Guardar nombre");
@@ -37,8 +39,8 @@ public class VentanaPerfil {
         });
 
         btnDepositar.addActionListener(e -> {
-            session.getRuleta().depositar(500);
-            lblSaldo.setText("Saldo: $" + session.getRuleta().getSaldo());
+            session.getRuletaController().depositar(500);
+            lblSaldo.setText("Saldo: $" + session.getRuletaController().getSaldo());
         });
 
         frame.add(lblUser);
