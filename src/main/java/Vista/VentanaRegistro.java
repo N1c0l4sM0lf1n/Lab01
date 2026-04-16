@@ -1,3 +1,5 @@
+package Vista;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -18,7 +20,7 @@ public class VentanaRegistro {
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(4, 2));
 
-        frame.add(new JLabel("Usuario:"));
+        frame.add(new JLabel("Modelo.Usuario:"));
         frame.add(txtUsuario);
 
         frame.add(new JLabel("Clave:"));
@@ -51,7 +53,7 @@ public class VentanaRegistro {
 
         VentanaLogin.USUARIOS.add(new Usuario(u, p, n));
 
-        JOptionPane.showMessageDialog(frame, "Usuario registrado");
+        JOptionPane.showMessageDialog(frame, "Modelo.Usuario registrado");
 
         frame.dispose();
         new VentanaLogin().mostrarVentana();

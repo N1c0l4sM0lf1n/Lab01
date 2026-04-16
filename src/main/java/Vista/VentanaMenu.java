@@ -1,10 +1,12 @@
+package Vista;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class VentanaMenu {
 
     private final JFrame frame = new JFrame("Menú");
-    private final JButton btnJugar = new JButton("Jugar Ruleta");
+    private final JButton btnJugar = new JButton("Jugar Modelo.Ruleta");
     private final JButton btnSalir = new JButton("Cerrar Sesión");
 
     public VentanaMenu() {

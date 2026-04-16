@@ -1,3 +1,5 @@
+package Vista;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
@@ -28,7 +30,7 @@ public class VentanaLogin {
         frame.setSize(300, 200);
         frame.setLayout(new GridLayout(4, 2));
 
-        frame.add(new JLabel("Usuario:"));
+        frame.add(new JLabel("Modelo.Usuario:"));
         frame.add(txtUsuario);
 
         frame.add(new JLabel("Clave:"));

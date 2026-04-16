@@ -1,9 +1,11 @@
+package Vista;
+
 import javax.swing.*;
 import java.awt.*;
 
 public class VentanaRuleta {
 
-    private final JFrame frame = new JFrame("Ruleta");
+    private final JFrame frame = new JFrame("Modelo.Ruleta");
     private final JTextField txtMonto = new JTextField();
     private final JComboBox<String> comboTipo =
             new JComboBox<>(new String[]{"R", "N", "P", "I"});
