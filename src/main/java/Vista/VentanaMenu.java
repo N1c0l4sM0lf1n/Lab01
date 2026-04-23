@@ -1,8 +1,9 @@
 package Vista;
 
+import Controlador.SessionController;
+
 import javax.swing.*;
 import java.awt.*;
-import Controlador.SessionController;
 
 public class VentanaMenu {
 
@@ -15,25 +16,21 @@ public class VentanaMenu {
     }
 
     private void configurar() {
-        frame.setSize(300,200);
+        frame.setSize(300,250);
         frame.setLayout(new GridLayout(4,1));
 
         JButton btnJugar = new JButton("Jugar");
-        JButton btnPerfil = new JButton("Perfil");
+        JButton btnHistorial = new JButton("Historial");
         JButton btnSalir = new JButton("Salir");
-
-        JLabel lblSaldo = new JLabel();
-
-        actualizarSaldo(lblSaldo);
 
         btnJugar.addActionListener(e -> {
             frame.dispose();
             new VentanaRuleta(session).mostrar();
         });
 
-        btnPerfil.addActionListener(e -> {
+        btnHistorial.addActionListener(e -> {
             frame.dispose();
-            new VentanaPerfil(session).mostrar();
+            new VentanaHistorial(session).mostrar();
         });
 
         btnSalir.addActionListener(e -> {
@@ -42,15 +39,9 @@ public class VentanaMenu {
             new VentanaLogin(session).mostrarVentana();
         });
 
-        frame.add(lblSaldo);
         frame.add(btnJugar);
-        frame.add(btnPerfil);
+        frame.add(btnHistorial);
         frame.add(btnSalir);
-    }
-
-    private void actualizarSaldo(JLabel lbl) {
-        int saldo = session.getRuletaController().getSaldo();
-        lbl.setText("Saldo: $" + saldo);
     }
 
     public void mostrar() {

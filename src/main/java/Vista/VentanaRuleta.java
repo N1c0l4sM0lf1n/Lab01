@@ -67,8 +67,7 @@ public class VentanaRuleta {
             Resultado resultado = session.getRuletaController()
                     .jugar(monto, tipo);
 
-            // Guardar en historial
-            session.getResultadoController().agregarResultado(resultado);
+
 
             // Mostrar resultado
             String mensaje =

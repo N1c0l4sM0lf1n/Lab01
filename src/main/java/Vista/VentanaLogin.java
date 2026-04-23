@@ -1,8 +1,9 @@
 package Vista;
 
+import Controlador.SessionController;
+
 import javax.swing.*;
 import java.awt.*;
-import Controlador.SessionController;
 
 public class VentanaLogin {
 
@@ -41,10 +42,7 @@ public class VentanaLogin {
     }
 
     private void login() {
-        String u = txtUser.getText();
-        String p = new String(txtPass.getPassword());
-
-        if (session.iniciarSesion(u, p)) {
+        if (session.iniciarSesion(txtUser.getText(), new String(txtPass.getPassword()))) {
             frame.dispose();
             new VentanaMenu(session).mostrar();
         } else {
@@ -53,15 +51,7 @@ public class VentanaLogin {
     }
 
     private void registrar() {
-        try {
-            session.registrarUsuario(
-                    txtUser.getText(),
-                    new String(txtPass.getPassword()),
-                    "Jugador"
-            );
-            JOptionPane.showMessageDialog(frame, "Registrado!");
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(frame, "Datos inválidos");
-        }
+        session.registrarUsuario(txtUser.getText(), new String(txtPass.getPassword()), "Jugador");
+        JOptionPane.showMessageDialog(frame, "Registrado!");
     }
 }
