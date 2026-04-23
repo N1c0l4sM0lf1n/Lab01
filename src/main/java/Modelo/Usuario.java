@@ -9,7 +9,6 @@ public class Usuario {
     private String username;
     private String password;
     private String nombre;
-    //Algo
 
     private final List<Resultado> historial = new ArrayList<>();
 
