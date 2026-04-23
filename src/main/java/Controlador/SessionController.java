@@ -13,7 +13,7 @@ public class SessionController {
         usuarioActual = new Usuario(u, p, n);
         ruleta = new Ruleta(1000);
 
-        ruletaController = new RuletaController(ruleta);
+        ruletaController = new RuletaController(ruleta, this);
         resultadoController = new ResultadoController();
     }
 
