@@ -14,7 +14,7 @@ public class SessionController {
         ruleta = new Ruleta(1000);
 
         ruletaController = new RuletaController(ruleta, this);
-        resultadoController = new ResultadoController();
+        resultadoController = new ResultadoController(this);
     }
 
     public boolean iniciarSesion(String u, String p) {
