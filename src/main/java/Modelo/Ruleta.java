@@ -1,11 +1,13 @@
 package Modelo;
 
-import java.util.Random;
+import java.util.*;
 
 public class Ruleta {
 
     private int saldo;
     private final Random rng = new Random();
+
+    private final List<Resultado> resultados = new ArrayList<>();
 
     private final int[] numerosRojos = {
             1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36
@@ -13,10 +15,6 @@ public class Ruleta {
 
     public Ruleta(int saldoInicial) {
         this.saldo = saldoInicial;
-    }
-
-    public Ruleta() {
-        this(0);
     }
 
     public int girar() {
@@ -41,16 +39,18 @@ public class Ruleta {
         return false;
     }
 
-    public void depositar(int monto) {
-        if (monto > 0) saldo += monto;
-    }
-
     public void apostar(int monto, boolean gano) {
         if (gano) saldo += monto;
         else saldo -= monto;
     }
 
-    public int getSaldo() {
-        return saldo;
+    public void depositar(int monto) {
+        if (monto > 0) saldo += monto;
+    }
+
+    public int getSaldo() { return saldo; }
+
+    public void registrarResultado(Resultado r) {
+        resultados.add(r);
     }
 }
