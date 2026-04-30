@@ -1,6 +1,6 @@
 package Controlador;
 
-import Modelo.Resultado;
+import Modelo.*;
 import java.util.List;
 
 public class ResultadoController {
@@ -13,5 +13,9 @@ public class ResultadoController {
 
     public List<Resultado> obtenerHistorial() {
         return session.getUsuario().getHistorial();
+    }
+
+    public Estadisticas obtenerEstadisticas() {
+        return new Estadisticas(obtenerHistorial());
     }
 }
