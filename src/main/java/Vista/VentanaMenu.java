@@ -22,6 +22,7 @@ public class VentanaMenu {
         JButton btnJugar = new JButton("Jugar");
         JButton btnHistorial = new JButton("Historial");
         JButton btnSalir = new JButton("Salir");
+        JButton btnEstadisticas = new JButton("Estadísticas");
 
         btnJugar.addActionListener(e -> {
             frame.dispose();
@@ -39,9 +40,15 @@ public class VentanaMenu {
             new VentanaLogin(session).mostrarVentana();
         });
 
+        btnEstadisticas.addActionListener(e -> {
+            frame.dispose();
+            new VentanaEstadisticas(session).mostrar();
+        });
+
         frame.add(btnJugar);
         frame.add(btnHistorial);
         frame.add(btnSalir);
+        frame.add(btnEstadisticas);
     }
 
     public void mostrar() {
