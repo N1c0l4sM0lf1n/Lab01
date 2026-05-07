@@ -13,6 +13,11 @@ public class VentanaRuleta {
         this.session = session;
     }
 
+    // ESTE MÉTODO LO AGREGAS
+    public void mostrar(){
+        jugar();
+    }
+
     public void jugar(){
 
         String opcion = JOptionPane.showInputDialog(
@@ -42,9 +47,12 @@ public class VentanaRuleta {
         Resultado r =
                 session.getRuletaController().jugar(apuesta);
 
-        JOptionPane.showMessageDialog(null,
+        JOptionPane.showMessageDialog(
+                null,
                 "Número: " + r.getNumero()
+                        + "\nTipo: " + r.getTipo()
                         + "\nResultado: " +
-                        (r.isGano() ? "Ganaste" : "Perdiste"));
+                        (r.isGano() ? "Ganaste" : "Perdiste")
+        );
     }
 }

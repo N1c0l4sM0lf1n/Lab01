@@ -1,58 +1,27 @@
 package Vista;
 
-import javax.swing.*;
-import java.awt.*;
 import Controlador.SessionController;
+import Modelo.Usuario;
+
+import javax.swing.*;
 
 public class VentanaPerfil {
 
-    private final SessionController session;
-    private final JFrame frame = new JFrame("Perfil");
+    private SessionController session;
 
-    private final JTextField txtNombre = new JTextField();
-
-    public VentanaPerfil(SessionController session) {
+    public VentanaPerfil(SessionController session){
         this.session = session;
-        configurar();
     }
 
-    private void configurar() {
-        frame.setSize(300,200);
-        frame.setLayout(new GridLayout(5,1));
+    public void mostrar(){
 
-        JLabel lblUser = new JLabel(
-                "Usuario: " + session.getUsuario().getUsername()
+        Usuario u = session.getUsuario();
+
+        JOptionPane.showMessageDialog(
+                null,
+                "=== PERFIL ===\n\n" +
+                        "Usuario: " + u.getUsername() +
+                        "\nNombre: " + u.getNombre()
         );
-
-        JLabel lblSaldo = new JLabel(
-                "Saldo: $" + session.getRuletaController().getSaldo()
-        );
-
-        JButton btnGuardar = new JButton("Guardar nombre");
-        JButton btnDepositar = new JButton("Depositar 500");
-
-        txtNombre.setText(session.getUsuario().getNombre());
-
-        btnGuardar.addActionListener(e -> {
-            session.getUsuario().setNombre(txtNombre.getText());
-            JOptionPane.showMessageDialog(frame, "Nombre actualizado");
-        });
-
-        btnDepositar.addActionListener(e -> {
-            session.getRuletaController().depositar(500);
-            lblSaldo.setText("Saldo: $" + session.getRuletaController().getSaldo());
-        });
-
-        frame.add(lblUser);
-        frame.add(new JLabel("Nombre:"));
-        frame.add(txtNombre);
-        frame.add(lblSaldo);
-        frame.add(btnGuardar);
-        frame.add(btnDepositar);
-    }
-
-    public void mostrar() {
-        frame.setLocationRelativeTo(null);
-        frame.setVisible(true);
     }
 }

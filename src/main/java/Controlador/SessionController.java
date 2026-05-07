@@ -35,4 +35,8 @@ public class SessionController {
     public ResultadoController getResultadoController(){
         return resultadoController;
     }
+
+    public void cerrarSesion() {
+        usuarioActual = null;
+    }
 }
