@@ -5,52 +5,55 @@ import java.util.*;
 public class Ruleta {
 
     private int saldo;
-    private final Random rng = new Random();
+    private Random random = new Random();
+    private List<Resultado> resultados = new ArrayList<>();
 
-    private final List<Resultado> resultados = new ArrayList<>();
-
-    private final int[] numerosRojos = {
-            1,3,5,7,9,12,14,16,18,19,21,23,25,27,30,32,34,36
+    private final int[] rojos = {
+            1,3,5,7,9,12,14,16,18,
+            19,21,23,25,27,30,32,34,36
     };
 
-    public Ruleta(int saldoInicial) {
-        this.saldo = saldoInicial;
+    public Ruleta(int saldo) {
+        this.saldo = saldo;
     }
 
-    public int girar() {
-        return rng.nextInt(37);
-    }
+    public Resultado jugar(ApuestaBase apuesta) {
 
-    public boolean evaluar(int numero, TipoApuesta tipo) {
-        if (numero == 0) return false;
+        int numero = random.nextInt(37);
+        String color = obtenerColor(numero);
 
-        return switch (tipo) {
-            case ROJO -> esRojo(numero);
-            case NEGRO -> !esRojo(numero);
-            case PAR -> numero % 2 == 0;
-            case IMPAR -> numero % 2 != 0;
-        };
-    }
+        boolean gano = apuesta.acierta(numero, color);
 
-    private boolean esRojo(int n) {
-        for (int r : numerosRojos) {
-            if (r == n) return true;
+        if(gano){
+            saldo += apuesta.getMonto();
+        } else {
+            saldo -= apuesta.getMonto();
         }
-        return false;
-    }
 
-    public void apostar(int monto, boolean gano) {
-        if (gano) saldo += monto;
-        else saldo -= monto;
-    }
+        Resultado r = new Resultado(
+                numero,
+                apuesta.getEtiqueta(),
+                apuesta.getMonto(),
+                gano
+        );
 
-    public void depositar(int monto) {
-        if (monto > 0) saldo += monto;
-    }
-
-    public int getSaldo() { return saldo; }
-
-    public void registrarResultado(Resultado r) {
         resultados.add(r);
+
+        return r;
+    }
+
+    public String obtenerColor(int numero){
+        if(numero == 0) return "Verde";
+
+        for(int r : rojos){
+            if(r == numero){
+                return "Rojo";
+            }
+        }
+        return "Negro";
+    }
+
+    public int getSaldo() {
+        return saldo;
     }
 }

@@ -1,16 +1,13 @@
 package Modelo;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 public class Usuario {
 
     private String username;
     private String password;
     private String nombre;
-
-    private final List<Resultado> historial = new ArrayList<>();
+    private List<Resultado> historial = new ArrayList<>();
 
     public Usuario(String username, String password, String nombre) {
         this.username = username;
@@ -27,15 +24,9 @@ public class Usuario {
     }
 
     public List<Resultado> getHistorial() {
-        return Collections.unmodifiableList(historial);
+        return historial;
     }
 
     public String getUsername() { return username; }
     public String getNombre() { return nombre; }
-
-    public void setNombre(String nombre) {
-        if (nombre != null && !nombre.isBlank()) {
-            this.nombre = nombre;
-        }
-    }
 }

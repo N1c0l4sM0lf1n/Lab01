@@ -4,8 +4,12 @@ import Controlador.SessionController;
 import Vista.VentanaLogin;
 
 public class Launcher {
+
     public static void main(String[] args) {
-        SessionController session = new SessionController();
-        new VentanaLogin(session).mostrarVentana();
+        SessionController session =
+                new SessionController();
+
+        new VentanaLogin(session)
+                .mostrarVentana();
     }
 }
