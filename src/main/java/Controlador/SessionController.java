@@ -13,10 +13,13 @@ public class SessionController {
 
         ArchivoUsuario.guardarUsuario(usuarioActual);
 
-        Ruleta ruleta = new Ruleta(1000);
+        IRepositorioResultados repo = new RepositorioEnMemoria();
+
+        Ruleta ruleta =
+                new Ruleta(1000, repo);
 
         ruletaController = new RuletaController(ruleta,this);
-        resultadoController = new ResultadoController(this);
+        resultadoController = new ResultadoController(this, repo);
     }
 
     public boolean iniciarSesion(String u,String p){

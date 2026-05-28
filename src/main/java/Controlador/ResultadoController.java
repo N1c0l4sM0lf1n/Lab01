@@ -8,15 +8,21 @@ public class ResultadoController {
 
     private SessionController session;
 
-    public ResultadoController(SessionController session){
+    private IRepositorioResultados repositorio;
+
+    public ResultadoController(
+            SessionController session,
+            IRepositorioResultados repositorio){
+
         this.session = session;
+        this.repositorio = repositorio;
     }
 
     public List<Resultado> obtenerHistorial(){
-        return session.getUsuario().getHistorial();
+        return repositorio.obtenerResultados();
     }
 
     public Estadisticas obtenerEstadisticas(){
-        return new Estadisticas(obtenerHistorial());
+        return new Estadisticas(repositorio);
     }
 }
